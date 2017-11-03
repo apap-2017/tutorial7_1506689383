@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,5 +29,13 @@ public class CourseController {
 			model.addAttribute("title", "Course Not Found");
 			return "course-not-found";
 		}
+	}
+	
+	@RequestMapping("/course/viewall")
+	public String viewall(Model model) {
+		List<CourseModel> courses = courseDAO.viewAll();
+		
+		model.addAttribute("courses", courses);
+		return "viewall-course";
 	}
 }
