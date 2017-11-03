@@ -19,25 +19,22 @@ public class StudentController {
 	StudentService studentDAO;
 
 	@RequestMapping("/")
-	public String index(Model model) {
-		model.addAttribute("title", "Index");
+	public String index() {
 		return "index";
 	}
 
 	@RequestMapping("/student/add")
-	public String add(Model model) {
-		model.addAttribute("title", "Add Student");
+	public String add() {
 		return "form-add";
 	}
 
 	@RequestMapping("/student/add/submit")
 	public String addSubmit(@RequestParam(value = "npm", required = false) String npm,
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "gpa", required = false) double gpa, Model model) {
+			@RequestParam(value = "gpa", required = false) double gpa) {
 		StudentModel student = new StudentModel(npm, name, gpa, null);
 		studentDAO.addStudent(student);
-		
-		model.addAttribute("title", "Succes Add");
+
 		return "success-add";
 	}
 
@@ -47,11 +44,9 @@ public class StudentController {
 
 		if (student != null) {
 			model.addAttribute("student", student);
-			model.addAttribute("title", "View Student");
 			return "view";
 		} else {
 			model.addAttribute("npm", npm);
-			model.addAttribute("title", "Not Found");
 			return "not-found";
 		}
 	}
@@ -62,11 +57,9 @@ public class StudentController {
 
 		if (student != null) {
 			model.addAttribute("student", student);
-			model.addAttribute("title", "View Student");
 			return "view";
 		} else {
 			model.addAttribute("npm", npm);
-			model.addAttribute("title", "Not Found");
 			return "not-found";
 		}
 	}
@@ -75,7 +68,6 @@ public class StudentController {
 	public String view(Model model) {
 		List<StudentModel> students = studentDAO.selectAllStudents();
 		model.addAttribute("students", students);
-		model.addAttribute("title", "View All Students");
 
 		return "viewall";
 	}
@@ -86,11 +78,9 @@ public class StudentController {
 
 		if (student != null) {
 			studentDAO.deleteStudent(npm);
-			model.addAttribute("title", "Delete Student");
 			return "delete";
 		} else {
 			model.addAttribute("npm", npm);
-			model.addAttribute("title", "Not Found");
 			return "not-found";
 		}
 	}
@@ -101,19 +91,17 @@ public class StudentController {
 
 		if (student != null) {
 			model.addAttribute("student", student);
-			model.addAttribute("title", "Update Student");
 			return "form-update";
 		} else {
 			model.addAttribute("npm", npm);
-			model.addAttribute("title", "Not Found");
 			return "not-found";
 		}
 	}
 
 	@RequestMapping(value = "/student/update/submit", method = RequestMethod.POST)
-	public String updateSubmit(Model model, StudentModel student) {
+	public String updateSubmit(StudentModel student) {
 		studentDAO.updateStudent(student);
-		model.addAttribute("title", "Success Update");
+
 		return "success-update";
 	}
 

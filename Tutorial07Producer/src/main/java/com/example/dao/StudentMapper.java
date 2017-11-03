@@ -38,8 +38,8 @@ public interface StudentMapper {
 	@Update("UPDATE student SET name=#{name}, gpa=#{gpa} WHERE npm=#{npm}")
 	void updateStudent(StudentModel student);
 
-	@Select("select course.id_course as id, name, credits " + "from studentcourse join course "
+	@Select("select course.id_course, name, credits " + "from studentcourse join course "
 			+ "on studentcourse.id_course = course.id_course " + "where studentcourse.npm = #{npm}")
-	@Results(value = { @Result(property = "idCourse", column = "id") })
+	@Results(value = {@Result(property = "idCourse", column = "id_course")})
 	List<CourseModel> selectCourses(@Param("npm") String npm);
 }

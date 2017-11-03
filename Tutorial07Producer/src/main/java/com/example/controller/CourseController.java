@@ -20,11 +20,9 @@ public class CourseController {
 
 		if (course != null) {
 			model.addAttribute("course", course);
-			model.addAttribute("title", "View Course");
 			return "viewcourse";
 		} else {
 			model.addAttribute("id", id);
-			model.addAttribute("title", "Course Not Found");
 			return "course-not-found";
 		}
 	}
