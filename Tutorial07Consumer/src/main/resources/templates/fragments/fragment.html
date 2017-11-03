@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Fragment</title>
+</head>
+<body>
+	<div th:fragment="header">
+		<title th:text="${title}">View All Students</title>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"></link>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+	</div>
+	<div th:fragment="navBar">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/student/viewall">Daftar Mahasiswa</a></li>
+			<li><a href="/student/add">Menambah Mahasiswa</a></li>
+		</ul>
+	</div>
+	<div th:fragment="footer">
+		<hr />
+		<h4>Mata Kuliah APAP</h4>
+	</div>
+</body>
+</html>
